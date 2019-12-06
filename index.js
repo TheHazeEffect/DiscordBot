@@ -19,22 +19,22 @@ bot.on('ready', () => {
 });
 
 bot.on('message', msg => {
-        const args = msg.content.split(/ +/);
-        const command = args.shift().toLowerCase();
-        console.info(`Called command: ${command}`);
-        
-        // console.log(msg.author)
-        const id = msg.author.id
-        console.log(bot.fetchUser(id))
-    
-        if (!bot.commands.has(command)) return;
-        
+    const args = msg.content.split(/ +/);
+    const command = args.shift().toLowerCase();
+    console.info(`Called command: ${command}`);
 
-        msg.author.send("test")
-        try {
-            bot.commands.get(command).execute(msg, args);
-        } catch (error) {
-            console.error(error);
-            msg.reply('there was an error trying to execute that command!');
-        }
+    // console.log(msg.author)
+    const id = msg.author.id
+    console.log(bot.fetchUser(id))
+
+    if (!bot.commands.has(command)) return;
+
+
+    msg.author.send("test")
+    try {
+        bot.commands.get(command).execute(msg, args);
+    } catch (error) {
+        console.error(error);
+        msg.reply('there was an error trying to execute that command!');
+    }
 });
