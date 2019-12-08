@@ -1,12 +1,13 @@
 require('dotenv').config();
-const Discord = require('discord.js');
 const botCommands = require('./commands');
 
-const bot = new Discord.Client();
-bot.commands = new Discord.Collection();
+import { Message, Client,Collection } from "discord.js";
+
+const bot = new Client();
+const commands = new Collection();
 
 Object.keys(botCommands).map(key => {
-    bot.commands.set(botCommands[key].name, botCommands[key]);
+    commands.set(botCommands[key].name, botCommands[key]);
 });
 
 const TOKEN = process.env.TOKEN;
@@ -18,8 +19,9 @@ bot.on('ready', () => {
     console.info(`Logged in as ${bot.user.tag}!`);
 });
 
-bot.on('message', msg => {
+bot.on('message', (msg: Message) => {
         const args = msg.content.split(/ +/);
+        
         const command = args.shift().toLowerCase();
         console.info(`Called command: ${command}`);
         
@@ -27,12 +29,12 @@ bot.on('message', msg => {
         const id = msg.author.id
         console.log(bot.fetchUser(id))
     
-        if (!bot.commands.has(command)) return;
+        if (!commands.has(command)) return;
         
 
-        msg.author.send("test")
+        // msg.author.send("test")
         try {
-            bot.commands.get(command).execute(msg, args);
+            commands.get(command).execute(msg, args);
         } catch (error) {
             console.error(error);
             msg.reply('there was an error trying to execute that command!');

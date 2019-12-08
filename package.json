@@ -1,10 +1,12 @@
 {
   "name": "discord-bot",
   "version": "1.0.0",
-  "description": "Discord bot for SitePoint",
+  "description": "Discord bootstrap",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build:live",
+    "build": "tsc -p .",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts"
   },
   "author": "Michiel Mulders",
   "license": "ISC",
@@ -13,6 +15,10 @@
     "dotenv": "^8.1.0"
   },
   "devDependencies": {
-    "eslint": "^6.7.2"
+    "@types/node": "^12.12.14",
+    "eslint": "^6.7.2",
+    "nodemon": "^2.0.1",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3"
   }
 }

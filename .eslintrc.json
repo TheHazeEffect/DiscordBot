@@ -1,5 +1,6 @@
 {
 	"extends": "eslint:recommended",
+	// "packageManager": "yarn",
 	"env": {
 		"node": true,
 		"es6": true
