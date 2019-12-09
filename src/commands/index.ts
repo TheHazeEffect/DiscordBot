@@ -1,8 +1,11 @@
-import { ICommand } from "../interfaces/ICommand";
+import { ping } from "./ping";
+import {inviteServer} from "./inviteServer";
+import {say} from "./say";
 
-const CommandList  = {
-	ping: import('./ping'),
-}
+export const botCommands  = [
+	ping,
+	inviteServer,
+	say
+]
 
-module.exports = CommandList
 

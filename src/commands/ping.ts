@@ -1,16 +1,26 @@
-import { Message } from "discord.js";
+import { Message,Client } from "discord.js";
 import { ICommand } from "../interfaces/ICommand";
 
 
-const ping : ICommand = {
+export const ping : ICommand = {
 	name: 'ping',
-	description: 'Ping!',
-	execute(msg: Message, args: string[]) {
-		console.log(args);
-		msg.reply('pong');
-		msg.channel.send('pong');
-		return true
+	description: 'Check the Server Ping!',
+	execute: async function (bot: Client,msg: Message, args: string[]) {
+
+		try {
+			const ping = await msg.channel.send('Pinging...')
+
+			if(!(ping instanceof Message))
+				throw Error("ping is not of Type Message")
+
+			ping.edit(
+			  `pong \n` 
+			+ `Latency is ${Math.floor(ping.createdTimestamp - msg.createdTimestamp)}\n`
+			+ `API Latency ${Math.round(bot.ping)}ms`)
+			return true
+		}catch(error){
+			console.log(error)
+			return false
+		}
 	},
 }
-
-module.exports = ping 

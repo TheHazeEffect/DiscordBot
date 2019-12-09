@@ -1,10 +1,10 @@
-import { Message } from "discord.js";
+import { Message,Client } from "discord.js";
 
 
 export interface ICommand {
     name: string,
     description: string,
-    execute: (msg:Message,args: string[]) =>  boolean
+    execute: (bot: Client,msg:Message,args: string[])  =>  Promise<boolean>
       
 }
 

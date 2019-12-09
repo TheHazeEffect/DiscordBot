@@ -1,42 +1,61 @@
-require('dotenv').config();
-const botCommands = require('./commands');
-
+import { botCommands } from "./commands";
+import { ICommand } from "./interfaces/ICommand";
 import { Message, Client,Collection } from "discord.js";
 
-const bot = new Client();
-const commands = new Collection();
+const bot = new Client({
+    disableEveryone: true
+});
+const commands = new Collection<String,ICommand>() 
+bot.login(process.env.TOKEN);
 
-Object.keys(botCommands).map(key => {
-    commands.set(botCommands[key].name, botCommands[key]);
+
+botCommands.forEach((command: ICommand ,index : number) => {
+    commands.set(botCommands[index].name, command);
 });
 
-const TOKEN = process.env.TOKEN;
-
-bot.login(TOKEN);
 
 bot.on('ready', () => {
-    // console.log(bot.users)
     console.info(`Logged in as ${bot.user.tag}!`);
+
+    bot.user.setPresence({
+        game : {
+            name : "Getting developed",
+            type: "WATCHING"
+        }
+    })
 });
 
-bot.on('message', (msg: Message) => {
-        const args = msg.content.split(/ +/);
-        
-        const command = args.shift().toLowerCase();
-        console.info(`Called command: ${command}`);
-        
-        // console.log(msg.author)
-        const id = msg.author.id
-        console.log(bot.fetchUser(id))
+bot.on('message', async (msg: Message) => {
+    const prefix = "!"
     
-        if (!commands.has(command)) return;
-        
+    if(msg.author.bot) return
+    if(!msg.guild) return
+    if(!msg.content.startsWith(prefix)) return
 
-        // msg.author.send("test")
-        try {
-            commands.get(command).execute(msg, args);
-        } catch (error) {
-            console.error(error);
-            msg.reply('there was an error trying to execute that command!');
-        }
+    console.log(`${msg.author.username} said ${msg.content}`)
+
+    // const args = msg.content.split(/ +/);
+    const args = msg.content.slice(prefix.length).trim().split(/ +/g)
+    let command = args.shift()
+
+    if(command===undefined)
+        throw new Error("command is undefined") 
+
+    command = command.toLowerCase()
+        
+    if (!commands.has(command)) 
+        return;
+    
+    try {
+
+        const findCommand = commands.get(command)
+        if(findCommand===undefined)
+            throw new Error("command is undefined") 
+
+        await findCommand.execute(bot,msg,args)
+        
+    } catch (error) {
+        console.error(error);
+        msg.reply('there was an error trying to execute that command!');
+    }
 });
