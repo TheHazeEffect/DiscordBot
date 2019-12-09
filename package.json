@@ -1,21 +1,28 @@
 {
-  "name": "discord-bot",
+  "name": "discord-bot-playground",
   "version": "1.0.0",
-  "description": "Discord bot for SitePoint",
+  "description": "Discord bootstrap",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "npm run build:live",
+    "build": "tsc -p .",
+    "build:live": "cross-env NODE_ENV=production env-cmd -f ./.env node'src/**/*.ts' --exec ts-node src/index.ts",
+    "dev": "npm run build:dev",
+    "build:dev": "cross-env NODE_ENV=development env-cmd -f ./.env nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts"
   },
-  "author": "Michiel Mulders",
+  "author": "Troy Anderson",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^12.12.14",
+    "cross-env": "^6.0.3",
     "discord.js": "^11.5.1",
-    "dotenv": "^8.1.0"
+    "dotenv": "^8.1.0",
+    "env-cmd": "^10.0.1"
   },
   "devDependencies": {
     "eslint": "^6.7.2",
     "nodemon": "^2.0.1",
-    "prettier": "^1.19.1"
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3"
   }
 }
