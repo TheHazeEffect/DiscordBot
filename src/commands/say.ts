@@ -4,7 +4,8 @@ import { ICommand } from "../interfaces/ICommand";
 
 export const say : ICommand = {
 	name: 'say',
-	description: 'Say something',
+    description: 'Say something',
+    args: "{Optional}<embed> <Message>",
 	execute: async function (bot: Client,msg: Message, args: string[]) {
 
         if(msg.deletable)

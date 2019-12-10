@@ -1,10 +1,11 @@
 import { Message,Client } from "discord.js";
-import { ICommand } from "../interfaces/ICommand";
 import { GMailService } from "../services/email/GMailService";
+import { ICommand } from "../interfaces/ICommand";
 
 export const sendEmail : ICommand = {
     name: "sendemail",
-    description: "Send an Email to email address",
+    description: "Send an email to given address",
+    args: "<EmailAddress> <Message>",
     execute: async function(bot: Client, msg: Message, args: string[]): Promise<boolean> {
 
         try {
@@ -16,6 +17,7 @@ export const sendEmail : ICommand = {
         }catch(error) {
             console.log(error)
             throw new Error("There was an error sending Gmail")
+
         }
 
     }
