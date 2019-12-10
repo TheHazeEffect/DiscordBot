@@ -5,7 +5,7 @@ import { ICommand } from "../interfaces/ICommand";
 export const ping : ICommand = {
 	name: 'ping',
 	description: 'Check the Server Ping!',
-	args: "No args",
+	args: "No Prgs",
 	execute: async function (bot: Client,msg: Message, args: string[]) {
 
 		try {

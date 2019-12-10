@@ -8,7 +8,6 @@ const bot = new Client({
 const commands = new Collection<String,ICommand>() 
 bot.login(process.env.TOKEN);
 
-
 botCommands.forEach((command: ICommand ,index : number) => {
     commands.set(botCommands[index].name, command);
 });
@@ -17,7 +16,7 @@ botCommands.forEach((command: ICommand ,index : number) => {
 bot.on('ready', () => {
     console.info(`Logged in as ${bot.user.tag}!`);
 
-    bot.user.setPresence({
+    bot.user.setPresence({ 
         game : {
             name : "Getting developed",
             type: "WATCHING"
