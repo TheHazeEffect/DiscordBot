@@ -1,10 +1,10 @@
 import { ping } from "./ping";
-import {inviteServer} from "./inviteServer";
+import {sendEmail} from "./sendEmail";
 import {say} from "./say";
 
 export const botCommands  = [
 	ping,
-	inviteServer,
+	sendEmail,
 	say
 ]
 

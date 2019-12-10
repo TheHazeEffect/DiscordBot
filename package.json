@@ -13,11 +13,17 @@
   "author": "Troy Anderson",
   "license": "ISC",
   "dependencies": {
+    "@types/bluebird": "^3.5.29",
     "@types/node": "^12.12.14",
+    "@types/nodemailer": "^6.2.2",
+    "@types/nodemailer-direct-transport": "^1.0.31",
+    "@types/nodemailer-smtp-transport": "^2.7.4",
     "cross-env": "^6.0.3",
     "discord.js": "^11.5.1",
     "dotenv": "^8.1.0",
-    "env-cmd": "^10.0.1"
+    "env-cmd": "^10.0.1",
+    "googleapis": "^45.0.0",
+    "nodemailer": "^6.4.1"
   },
   "devDependencies": {
     "eslint": "^6.7.2",
