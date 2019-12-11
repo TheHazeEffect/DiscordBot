@@ -1,6 +1,6 @@
 import { Message,Client,RichEmbed } from "discord.js";
 import { ICommand } from "../interfaces/ICommand";
-
+import {checkArgLength  } from "./helpers/checkarglen";
 
 export const say : ICommand = {
 	name: 'say',
@@ -11,16 +11,7 @@ export const say : ICommand = {
         if(msg.deletable)
             msg.delete()
 
-        if(args.length < 1){
-            let reply = await msg.reply("Nothing to say!")
-
-            if(reply instanceof Message){
-                reply.delete(5000)
-                return true
-            }
-            else
-                throw new Error("Message is not an instance of Message")
-        }
+        await checkArgLength(args,msg,1)
 
         console.log(`Hex color is ${msg.guild.me.displayHexColor}`)
         const roleColor = msg.guild.me.displayHexColor === "#000000" ? "#eeeeee" : msg.guild.me.displayHexColor

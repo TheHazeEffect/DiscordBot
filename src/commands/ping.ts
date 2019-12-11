@@ -12,7 +12,7 @@ export const ping : ICommand = {
 			const ping = await msg.channel.send('Pinging...')
 
 			if(!(ping instanceof Message))
-				throw Error("ping is not of Type Message")
+				throw Error("variable 'ping' is not of Type Message")
 
 			ping.edit(
 			  `pong \n` 
