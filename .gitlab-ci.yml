@@ -1,0 +1,22 @@
+image: node:10.16.1
+
+stages:
+    - build
+    - lint
+
+cache:
+    paths:
+        - node_modules/
+
+buildDependencies:
+    stage: build
+    script:
+        - yarn
+    artifacts:
+        paths:
+            - node_modules
+
+lint-check:
+    stage: lint
+    script:
+        - yarn lint
