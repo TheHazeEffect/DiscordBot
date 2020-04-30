@@ -4,7 +4,7 @@ import { Command } from '../interfaces/ICommand';
 export const ping: Command = {
     name: 'ping',
     description: 'Check the Server Ping!',
-    args: 'No Prgs',
+    args: 'No Args',
     async execute(bot: Client, msg: Message, args: string[]) {
         try {
             const pingmsg = await msg.channel.send('Pinging...');
