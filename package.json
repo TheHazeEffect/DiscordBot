@@ -21,7 +21,7 @@
     "@types/nodemailer": "^6.2.2",
     "@types/nodemailer-direct-transport": "^1.0.31",
     "@types/nodemailer-smtp-transport": "^2.7.4",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "cross-env": "^7.0.2",
     "discord.js": "^11.5.1",
     "env-cmd": "^10.0.1",
